@@ -1,4 +1,4 @@
-#Singleton Wrapper
+# Singleton Wrapper
 My Attempt on creating thread-safe wrapper for Singleton Design Pattern for C++.
 
 Main purpose for this project is to test thread safety and learn about CMake packaging.
@@ -9,7 +9,7 @@ Main purpose for this project is to test thread safety and learn about CMake pac
 * [Example usage](#example-usage)
 * [Final thoughts](#final-thoughts)
 
-##Information
+## Information
 
 I created this project to make first public repository with something slightly useful.<br>
 Singleton Wrapper is template class that will control initialisation and destruction of Singleton objects. Interface allows for manual creation and destruction of held object at will. <br>
@@ -35,7 +35,7 @@ cmake --build . --target install
 ```
 
 
-##Example usage
+## Example usage
 
 ```c++
 #include <thread>
@@ -53,7 +53,7 @@ int main()
 ```
 
 
-###Final Thoughts
+### Final Thoughts
 
 This is my first public repository, and wish to learn more about sharing, creating code and contributing.<br>
 Please be considerate - but also share some serious critique, insight. I hope someone finds this useful or at least help me test correctness of my approach.
