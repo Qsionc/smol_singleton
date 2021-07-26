@@ -1,7 +1,11 @@
+/**
+ * This software is free to use.
+ * Consider leaving a comment with some insight.
+ */
+
 #include <iostream>
 #include <gtest/gtest.h>
 #include <SingletonWrapper.h>
-#include <thread>
 
 using namespace singleton;
 

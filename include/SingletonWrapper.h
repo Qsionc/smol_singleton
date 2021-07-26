@@ -1,6 +1,7 @@
-//
-// Created by lord on 24/07/2021.
-//
+/**
+ * This software is free to use.
+ * Consider leaving a comment with some insight.
+ */
 
 #ifndef SINGLETONWRAPPER_SINGLETONWRAPPER_H
 #define SINGLETONWRAPPER_SINGLETONWRAPPER_H

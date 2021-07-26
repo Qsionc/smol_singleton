@@ -3,7 +3,7 @@ My Attempt on creating thread-safe wrapper for Singleton Design Pattern for C++.
 
 Main purpose for this project is to test thread safety and learn about CMake packaging.
 
-##Table of contents
+## Table of contents
 * [Information](#information)
 * [Installation](#installation)
 * [Example usage](#example-usage)
@@ -22,7 +22,7 @@ Wrapper allows for copying and copy assignment using default constructors, but n
 
 Tests of SingletonWrapper were performed using `googletest`, you can disable them by setting variable `UNIT_TEST` in CMakeLists.txt to `OFF`. 
 
-##Installation
+## Installation
 
 After download run cmake and build target install.
 
@@ -46,9 +46,9 @@ int main()
     singleton::wrapper<int> single;
     std::thread t([](singleton::wrapper<int> _s) { //SingletonWrapper is copyable but not movable
         _s.init(42);
-    };
-    std::this_thread::sleep_for(std::chrono::milliseconds(100));
-    std::cout << *single << std::endl; // Outputs 42
+    }, single);
+    std::this_thread::sleep_for(std::chrono::milliseconds(100)); // Just small synchronisation, use std::latch instead
+    std::cout << *single << std::endl; // Outputs 42, dereference operator returns int&
 }
 ```
 
