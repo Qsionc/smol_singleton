@@ -1,13 +1,14 @@
-# Singleton Wrapper
+# smol::singleton
+
 My Attempt on creating thread-safe wrapper for Singleton Design Pattern for C++.
 
 Main purpose for this project is to test thread safety and learn about CMake packaging.
 
 ## Table of contents
-* [Information](#information)
-* [Installation](#installation)
-* [Example usage](#example-usage)
-* [Final thoughts](#final-thoughts)
+1. [Information](#information)
+2. [Installation](#installation)
+3. [Example usage](#example-usage)
+4. [Final thoughts](#final-thoughts)
 
 ## Information
 
@@ -17,10 +18,10 @@ I created it to avoid necessity of using pattern with static initialisation in s
 This allows for creation of "Singletons" with classes that are not created with Singleton Pattern.
 
 The class still uses static private member, but all static members have default constructors marked `noexcept`, so it should be safe to use.<br>
-Class member template function `init(Args&& ... _args)` can throw in case there is any exception during initialisation of new singleton object.
+Class member template function `init(Args&& ... _args)` can throw in case there is any exception during initialisation of new smol object.
 Wrapper allows for copying and copy assignment using default constructors, but not moves.
 
-Tests of SingletonWrapper were performed using `googletest`, you can disable them by setting variable `UNIT_TEST` in CMakeLists.txt to `OFF`. 
+Tests of singleton were performed using `googletest`, you can disable them by setting variable `UNIT_TEST` in CMakeLists.txt to `OFF`. 
 
 ## Installation
 
@@ -34,26 +35,33 @@ cmake .. -DCMAKE_INSTALL_PREFIX:STRING="${HOME}/.local" # or "home/user-name/.lo
 cmake --build . --target install
 ```
 
-
 ## Example usage
 
+In your `CMakeLists.txt` use `find_package` to find singleton library:
+```cmake
+find_package(singleton REQUIRED)
+# ...
+add_executable(some_exec some_source.cpp)
+target_link_libraries(some_exec PRIVATE singleton::singleton)
+```
+Remember to provide proper CMAKE_PREFIX_PATH for find_package engine.
 ```c++
 #include <thread>
-#include <SingletonWrapper.h>
+#include <singleton.h>
 
 int main()
 {
-    singleton::wrapper<int> single;
-    std::thread t([](singleton::wrapper<int> _s) { //SingletonWrapper is copyable but not movable
+    smol::singleton<int> single;
+    std::thread t([](smol::singleton<int> _s) { //singleton is trivially copyable but not movable
         _s.init(42);
     }, single);
-    std::this_thread::sleep_for(std::chrono::milliseconds(100)); // Just small synchronisation, use std::latch instead
+    std::this_thread::sleep_for(std::chrono::milliseconds(100)); // Just small synchronisation, use better synchronisation tools
     std::cout << *single << std::endl; // Outputs 42, dereference operator returns int&
+    return 0;
 }
 ```
 
-
-### Final Thoughts
+# Final Thoughts
 
 This is my first public repository, and wish to learn more about sharing, creating code and contributing.<br>
 Please be considerate - but also share some serious critique, insight. I hope someone finds this useful or at least help me test correctness of my approach.

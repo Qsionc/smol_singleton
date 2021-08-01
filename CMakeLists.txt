@@ -10,7 +10,7 @@ endif ()
 
 project(SingletonWrapper LANGUAGES CXX)
 
-add_library(singleton INTERFACE ${CMAKE_SOURCE_DIR}/include/SingletonWrapper.h)
+add_library(singleton INTERFACE ${CMAKE_SOURCE_DIR}/include/singleton.h)
 target_include_directories(singleton INTERFACE
         $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/include>
         $<INSTALL_INTERFACE:${SINGLETON_INCLUDE_INSTALL_DIR}>)
@@ -29,4 +29,4 @@ install(EXPORT singleton-lib
         FILE singleton-config.cmake
         NAMESPACE singleton::
         DESTINATION ${SINGLETON_CONFIG_INSTALL_DIR})
-install(FILES ${CMAKE_SOURCE_DIR}/include/SingletonWrapper.h DESTINATION ${SINGLETON_INCLUDE_INSTALL_DIR})
+install(FILES ${CMAKE_SOURCE_DIR}/include/singleton.h DESTINATION ${SINGLETON_INCLUDE_INSTALL_DIR})
